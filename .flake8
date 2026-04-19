@@ -1,0 +1,12 @@
+[flake8]
+max-line-length = 120
+extend-ignore = E203, W503
+exclude =
+    backend/venv,
+    backend/venv_new,
+    backend/*/migrations,
+    backend/posapi/settings,
+    */node_modules,
+    .git
+per-file-ignores =
+    backend/*/apps.py:F401

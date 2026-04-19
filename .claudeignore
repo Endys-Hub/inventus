@@ -1,0 +1,17 @@
+.env
+.env.*
+.env.local
+.env.production
+.env.development
+
+node_modules
+.git
+dist
+build
+
+*.key
+*.pem
+secrets/
+node_modules/
+
+.env*

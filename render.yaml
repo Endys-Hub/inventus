@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: inventus-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: ./build.sh
+    startCommand: gunicorn posapi.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: posapi.settings.prod
+      - key: SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: inventus-db
+          property: connectionString
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: PAYSTACK_SECRET_KEY
+        sync: false
+      - key: PAYSTACK_PUBLIC_KEY
+        sync: false
+
+databases:
+  - name: inventus-db
+    databaseName: inventus
+    user: inventus_user

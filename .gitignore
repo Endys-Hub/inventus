@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Virtual environments
+venv/
+venv_new/
+env/
+
+# Django
+media/
+staticfiles/
+
+# Env files
+.env
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# Migrations cache
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+
+# Misc
+project_structure.txt
+
+# Frontend
+
+# Node
+node_modules/
+
+# Build output
+dist/
+
+# Env files
+.env
+.env.local
+.env.production
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+CLAUDE.md 
