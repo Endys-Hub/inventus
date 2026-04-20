@@ -155,7 +155,7 @@ export default function Dashboard() {
   return (
     <>
       <Navbar />
-      <div className="p-6 max-w-7xl mx-auto">
+      <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
           <div>

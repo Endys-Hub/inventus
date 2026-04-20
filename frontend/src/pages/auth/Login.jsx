@@ -25,7 +25,7 @@ export default function Login() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded shadow-md w-80">
+      <div className="bg-white p-6 rounded shadow-md w-full max-w-sm mx-4 sm:mx-auto">
         <div className="text-center mb-6">
           <h1 className="text-2xl font-bold text-gray-900">Inventus</h1>
           <p className="text-sm text-gray-500 mt-1">POS &amp; Inventory Management System</p>

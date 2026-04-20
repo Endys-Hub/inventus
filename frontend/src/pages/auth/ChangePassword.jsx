@@ -51,7 +51,7 @@ export default function ChangePassword() {
     <>
       <Navbar />
       <div className="flex justify-center items-center min-h-[calc(100vh-64px)] bg-gray-100">
-        <div className="bg-white p-6 rounded shadow-md w-96">
+        <div className="bg-white p-6 rounded shadow-md w-full max-w-md mx-4 sm:mx-auto">
           <h1 className="text-xl font-bold mb-4">Change Password</h1>
 
           {success && (

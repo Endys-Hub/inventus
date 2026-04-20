@@ -298,10 +298,10 @@ export default function POS() {
       )}
 
       {/* ── Body ── */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
 
         {/* ── Left panel ── */}
-        <div className="w-72 flex-shrink-0 border-r bg-white flex flex-col p-4 gap-3">
+        <div className="w-full md:w-72 md:flex-shrink-0 md:border-r bg-white flex flex-col p-4 gap-3">
 
           {/* Search / barcode input */}
           <div className="relative">
@@ -407,12 +407,12 @@ export default function POS() {
         </div>
 
         {/* ── Right panel — Cart table ── */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto p-4 overflow-x-hidden">
           <h2 className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
             Cart
           </h2>
 
-          <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+          <div className="overflow-x-auto bg-white rounded-xl border border-gray-200 overflow-hidden">
             <table className="w-full text-sm">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>

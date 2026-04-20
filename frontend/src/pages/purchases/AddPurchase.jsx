@@ -91,7 +91,7 @@ export default function AddPurchase() {
   };
 
   return (
-    <div className="p-6">
+    <div className="px-4 sm:px-6 lg:px-8 py-6">
       <h2 className="text-2xl font-bold mb-4">Add New Purchase</h2>
       <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded shadow">
 
@@ -119,12 +119,12 @@ export default function AddPurchase() {
           {purchaseItems.map((item, index) => (
             <div
               key={index}
-              className="grid grid-cols-4 gap-2 mb-2 items-end"
+              className="grid grid-cols-1 sm:grid-cols-4 gap-2 mb-2 items-end"
             >
               <select
                 value={item.product}
                 onChange={(e) => handleItemChange(index, "product", e.target.value)}
-                className="border p-2 rounded col-span-2"
+                className="border p-2 rounded col-span-1 sm:col-span-2"
                 required
               >
                 <option value="">-- Select Product --</option>
@@ -201,7 +201,7 @@ export default function AddPurchase() {
         {/* Submit */}
         <button
           type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          className="w-full md:w-auto bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
         >
           Save Purchase
         </button>

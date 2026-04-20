@@ -51,7 +51,7 @@ export default function ExpensesList() {
   return (
     <>
       <Navbar />
-      <div className="p-6">
+      <div className="px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold">Expenses</h2>
           <div className="flex items-center gap-3">

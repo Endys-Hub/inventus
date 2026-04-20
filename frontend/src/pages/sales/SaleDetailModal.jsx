@@ -32,7 +32,7 @@ export default function SaleDetailModal({ sale, onClose }) {
 
   return createPortal(
     <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded shadow-lg w-full max-w-lg relative">
+      <div className="bg-white p-4 sm:p-6 rounded shadow-lg w-full max-w-lg mx-4 relative">
         <button
           onClick={onClose}
           className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 font-bold text-xl"
@@ -45,7 +45,7 @@ export default function SaleDetailModal({ sale, onClose }) {
           <p><strong>Date:</strong> {new Date(sale.created_at).toLocaleString()}</p>
           <p><strong>Payment Method:</strong> {sale.payment_method}</p>
 
-          <table className="w-full border mt-2">
+          <div className="overflow-x-auto mt-2"><table className="w-full border">
             <thead className="bg-gray-200">
               <tr>
                 <th className="p-2 border">Item</th>
@@ -66,24 +66,24 @@ export default function SaleDetailModal({ sale, onClose }) {
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></div>
 
           <p className="text-lg font-bold text-right mt-2">
             Total: ₦{sale.total_amount}
           </p>
         </div>
 
-        <div className="flex justify-between mt-4">
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-between gap-2 mt-4">
           <button
             onClick={onClose}
-            className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+            className="w-full sm:w-auto bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
           >
             Close
           </button>
 
           <button
             onClick={handlePrint}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+            className="w-full sm:w-auto bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
           >
             Print Receipt
           </button>

@@ -28,7 +28,7 @@ export default function SalesHistory() {
   return (
     <>
       <Navbar />
-      <div className="p-6">
+      <div className="px-4 sm:px-6 lg:px-8 py-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold">Sales History</h2>
           {isFetching && !isLoading && (
@@ -66,7 +66,7 @@ export default function SalesHistory() {
 
         {isError && <ErrorMessage error={error} onRetry={refetch} />}
 
-        <div className="bg-white shadow rounded overflow-hidden">
+        <div className="overflow-x-auto bg-white shadow rounded overflow-hidden">
           <table className="w-full">
             <thead className="bg-gray-200">
               <tr>

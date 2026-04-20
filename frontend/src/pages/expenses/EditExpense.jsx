@@ -63,7 +63,7 @@ export default function EditExpense() {
   return (
     <>
       <Navbar />
-      <div className="p-6 max-w-xl mx-auto">
+      <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-xl mx-auto">
         <h2 className="text-2xl font-bold mb-4">Edit Expense</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -96,12 +96,12 @@ export default function EditExpense() {
             onChange={(e) => setDescription(e.target.value)}
           />
 
-          <div className="flex gap-2">
-            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          <div className="flex flex-col sm:flex-row gap-2">
+            <button type="submit" className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
               Update
             </button>
 
-            <button type="button" onClick={() => navigate("/expenses")} className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">
+            <button type="button" onClick={() => navigate("/expenses")} className="w-full sm:w-auto bg-gray-300 px-4 py-2 rounded hover:bg-gray-400">
               Cancel
             </button>
           </div>

@@ -32,7 +32,7 @@ export default function PurchasesPage() {
   };
 
   return (
-    <div className="p-6">
+    <div className="px-4 sm:px-6 lg:px-8 py-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold">Purchases</h1>
         <Link to="/purchases/add" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
@@ -42,7 +42,7 @@ export default function PurchasesPage() {
 
       {isError && <ErrorMessage error={error} onRetry={refetch} />}
 
-      <div className="bg-white rounded shadow overflow-hidden">
+      <div className="overflow-x-auto bg-white rounded shadow overflow-hidden">
         <table className="w-full table-auto">
           <thead className="bg-gray-100">
             <tr>

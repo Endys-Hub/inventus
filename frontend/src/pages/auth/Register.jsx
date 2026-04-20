@@ -26,7 +26,7 @@ export default function Register() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded shadow-md w-80">
+      <div className="bg-white p-6 rounded shadow-md w-full max-w-sm mx-4 sm:mx-auto">
         <h1 className="text-xl font-bold mb-4">Create Account</h1>
 
         {error && <p className="text-red-600 mb-2">{error}</p>}

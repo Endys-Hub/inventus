@@ -77,23 +77,23 @@ export default function SalesSummary() {
     <>
       <Navbar />
 
-      <div className="p-6">
+      <div className="px-4 sm:px-6 lg:px-8 py-6">
         <h2 className="text-2xl font-bold mb-4">Business Summary</h2>
 
         {/* Filter */}
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
           <input
             type="date"
             value={filterDate}
             onChange={(e) => setFilterDate(e.target.value)}
-            className="border p-2 rounded"
+            className="border p-2 rounded w-full sm:w-auto"
           />
-          <button onClick={fetchAll} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          <button onClick={fetchAll} className="w-full sm:w-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
             Apply
           </button>
           <button
             onClick={() => { setFilterDate(""); fetchAll(); }}
-            className="bg-gray-300 px-3 py-2 rounded hover:bg-gray-400"
+            className="w-full sm:w-auto bg-gray-300 px-3 py-2 rounded hover:bg-gray-400"
           >
             Reset
           </button>
@@ -129,7 +129,7 @@ export default function SalesSummary() {
             {/* Payment breakdown */}
             <div className="mb-6 p-4 bg-white rounded shadow">
               <h3 className="text-lg font-semibold mb-2">Payment Breakdown</h3>
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-4">
                 <div>Cash: ₦{Number(salesSummary.paymentBreakdown.cash || 0).toLocaleString()}</div>
                 <div>POS: ₦{Number(salesSummary.paymentBreakdown.pos || 0).toLocaleString()}</div>
                 <div>Transfer: ₦{Number(salesSummary.paymentBreakdown.transfer || 0).toLocaleString()}</div>
@@ -143,7 +143,7 @@ export default function SalesSummary() {
                 {recentSales.length === 0 ? (
                   <p>No sales.</p>
                 ) : (
-                  <table className="w-full text-sm">
+                  <div className="overflow-x-auto"><table className="w-full text-sm">
                     <thead className="text-left text-gray-600">
                       <tr>
                         <th className="p-2">ID</th>
@@ -162,7 +162,7 @@ export default function SalesSummary() {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                  </table></div>
                 )}
               </div>
 
@@ -172,7 +172,7 @@ export default function SalesSummary() {
                 {recentExpenses.length === 0 ? (
                   <p>No expenses.</p>
                 ) : (
-                  <table className="w-full text-sm">
+                  <div className="overflow-x-auto"><table className="w-full text-sm">
                     <thead className="text-left text-gray-600">
                       <tr>
                         <th className="p-2">Date</th>
@@ -189,7 +189,7 @@ export default function SalesSummary() {
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                  </table></div>
                 )}
               </div>
             </div>
