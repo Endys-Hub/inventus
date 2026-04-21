@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { CartProvider } from "./context/CartContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import ErrorFallback from "./components/ErrorFallback.jsx";
 
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
@@ -56,113 +57,118 @@ const queryClient = new QueryClient({
 });
 
 const router = createBrowserRouter([
-  { path: "/login", element: <Login /> },
-  { path: "/register", element: <Register /> },
+  {
+    errorElement: <ErrorFallback />,
+    children: [
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
 
-  // Dashboard
-  {
-    path: "/dashboard",
-    element: <ProtectedRoute allowedRoles={ALL_ROLES}><Dashboard /></ProtectedRoute>,
-  },
+      // Dashboard
+      {
+        path: "/dashboard",
+        element: <ProtectedRoute allowedRoles={ALL_ROLES}><Dashboard /></ProtectedRoute>,
+      },
 
-  // Products
-  {
-    path: "/products",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><ProductsPage /></ProtectedRoute>,
-  },
-  {
-    path: "/products/add",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><AddProduct /></ProtectedRoute>,
-  },
-  {
-    path: "/products/edit/:id",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><EditProduct /></ProtectedRoute>,
-  },
+      // Products
+      {
+        path: "/products",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><ProductsPage /></ProtectedRoute>,
+      },
+      {
+        path: "/products/add",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><AddProduct /></ProtectedRoute>,
+      },
+      {
+        path: "/products/edit/:id",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><EditProduct /></ProtectedRoute>,
+      },
 
-  // Categories
-  {
-    path: "/categories",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><CategoriesPage /></ProtectedRoute>,
-  },
-  {
-    path: "/categories/add",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><AddCategory /></ProtectedRoute>,
-  },
-  {
-    path: "/categories/edit/:id",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><EditCategory /></ProtectedRoute>,
-  },
+      // Categories
+      {
+        path: "/categories",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><CategoriesPage /></ProtectedRoute>,
+      },
+      {
+        path: "/categories/add",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><AddCategory /></ProtectedRoute>,
+      },
+      {
+        path: "/categories/edit/:id",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><EditCategory /></ProtectedRoute>,
+      },
 
-  // Suppliers
-  {
-    path: "/suppliers",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><SuppliersList /></ProtectedRoute>,
-  },
-  {
-    path: "/suppliers/add",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><AddSupplier /></ProtectedRoute>,
-  },
-  {
-    path: "/suppliers/edit/:id",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><EditSupplier /></ProtectedRoute>,
-  },
+      // Suppliers
+      {
+        path: "/suppliers",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><SuppliersList /></ProtectedRoute>,
+      },
+      {
+        path: "/suppliers/add",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><AddSupplier /></ProtectedRoute>,
+      },
+      {
+        path: "/suppliers/edit/:id",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><EditSupplier /></ProtectedRoute>,
+      },
 
-  // Purchases
-  {
-    path: "/purchases",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><PurchasesPage /></ProtectedRoute>,
-  },
-  {
-    path: "/purchases/add",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><AddPurchase /></ProtectedRoute>,
-  },
-  {
-    path: "/purchases/edit/:id",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><EditPurchase /></ProtectedRoute>,
-  },
+      // Purchases
+      {
+        path: "/purchases",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><PurchasesPage /></ProtectedRoute>,
+      },
+      {
+        path: "/purchases/add",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><AddPurchase /></ProtectedRoute>,
+      },
+      {
+        path: "/purchases/edit/:id",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><EditPurchase /></ProtectedRoute>,
+      },
 
-  // POS
-  {
-    path: "/pos",
-    element: <ProtectedRoute allowedRoles={ALL_ROLES}><POS /></ProtectedRoute>,
-  },
-  {
-    path: "/pos-summary",
-    element: <ProtectedRoute allowedRoles={ALL_ROLES}><POSSummary /></ProtectedRoute>,
-  },
+      // POS
+      {
+        path: "/pos",
+        element: <ProtectedRoute allowedRoles={ALL_ROLES}><POS /></ProtectedRoute>,
+      },
+      {
+        path: "/pos-summary",
+        element: <ProtectedRoute allowedRoles={ALL_ROLES}><POSSummary /></ProtectedRoute>,
+      },
 
-  // Sales
-  {
-    path: "/sales",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><SalesHistory /></ProtectedRoute>,
-  },
-  {
-    path: "/summary",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><SalesSummary /></ProtectedRoute>,
-  },
+      // Sales
+      {
+        path: "/sales",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><SalesHistory /></ProtectedRoute>,
+      },
+      {
+        path: "/summary",
+        element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><SalesSummary /></ProtectedRoute>,
+      },
 
-  // Expenses
-  {
-    path: "/expenses",
-    element: <ProtectedRoute allowedRoles={OWNER_ONLY}><ExpensesList /></ProtectedRoute>,
-  },
-  {
-    path: "/expenses/add",
-    element: <ProtectedRoute allowedRoles={OWNER_ONLY}><AddExpense /></ProtectedRoute>,
-  },
-  {
-    path: "/expenses/edit/:id",
-    element: <ProtectedRoute allowedRoles={OWNER_ONLY}><EditExpense /></ProtectedRoute>,
-  },
+      // Expenses
+      {
+        path: "/expenses",
+        element: <ProtectedRoute allowedRoles={OWNER_ONLY}><ExpensesList /></ProtectedRoute>,
+      },
+      {
+        path: "/expenses/add",
+        element: <ProtectedRoute allowedRoles={OWNER_ONLY}><AddExpense /></ProtectedRoute>,
+      },
+      {
+        path: "/expenses/edit/:id",
+        element: <ProtectedRoute allowedRoles={OWNER_ONLY}><EditExpense /></ProtectedRoute>,
+      },
 
-  // Change Password
-  {
-    path: "/change-password",
-    element: <ProtectedRoute allowedRoles={ALL_ROLES}><ChangePassword /></ProtectedRoute>,
-  },
+      // Change Password
+      {
+        path: "/change-password",
+        element: <ProtectedRoute allowedRoles={ALL_ROLES}><ChangePassword /></ProtectedRoute>,
+      },
 
-  // Fallback
-  { path: "*", element: <Login /> },
+      // Fallback
+      { path: "*", element: <Login /> },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

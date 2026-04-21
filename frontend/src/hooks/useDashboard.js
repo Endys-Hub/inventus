@@ -20,7 +20,8 @@ export function useDashboard(period, role) {
         fetchLowStockProducts(10),
       ]);
       setMetrics(metricsRes.data);
-      setLowStock(lowStockRes.data);
+      const raw = lowStockRes.data;
+      setLowStock(Array.isArray(raw) ? raw : (raw?.results ?? []));
     } catch (err) {
       setError(err);
     } finally {

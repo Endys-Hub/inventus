@@ -20,7 +20,8 @@ export default function EditPurchase() {
     const fetchSuppliers = async () => {
       try {
         const res = await api.get("/inventory/suppliers/");
-        setSuppliers(res.data);
+        const data = res.data;
+        setSuppliers(Array.isArray(data) ? data : (data?.results ?? []));
       } catch (err) {
         console.error("Error fetching suppliers:", err);
       }
@@ -29,7 +30,8 @@ export default function EditPurchase() {
     const fetchProducts = async () => {
       try {
         const res = await api.get("/inventory/products/");
-        setProducts(res.data);
+        const data = res.data;
+        setProducts(Array.isArray(data) ? data : (data?.results ?? []));
       } catch (err) {
         console.error("Error fetching products:", err);
       }

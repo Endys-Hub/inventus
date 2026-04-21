@@ -55,7 +55,7 @@ export default function SaleDetailModal({ sale, onClose }) {
               </tr>
             </thead>
             <tbody>
-              {sale.items.map((item) => (
+              {(Array.isArray(sale.items) ? sale.items : []).map((item) => (
                 <tr key={item.id}>
                   <td className="p-2 border">{item.product_name}</td>
                   <td className="p-2 border">{item.quantity}</td>

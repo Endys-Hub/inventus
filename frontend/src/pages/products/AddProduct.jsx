@@ -17,7 +17,8 @@ export default function AddProduct() {
 
   const fetchCategories = async () => {
     const res = await api.get("/inventory/categories/");
-    setCategories(res.data);
+    const data = res.data;
+    setCategories(Array.isArray(data) ? data : (data?.results ?? []));
   };
 
   useEffect(() => {
