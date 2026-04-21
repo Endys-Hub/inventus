@@ -43,6 +43,7 @@ import "./index.css";
 
 const ALL_ROLES = ["OWNER", "MANAGER", "CASHIER"];
 const OWNER_MANAGER = ["OWNER", "MANAGER"];
+const OWNER_ONLY = ["OWNER"];
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -67,7 +68,7 @@ const router = createBrowserRouter([
   // Products
   {
     path: "/products",
-    element: <ProtectedRoute allowedRoles={ALL_ROLES}><ProductsPage /></ProtectedRoute>,
+    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><ProductsPage /></ProtectedRoute>,
   },
   {
     path: "/products/add",
@@ -133,7 +134,7 @@ const router = createBrowserRouter([
   // Sales
   {
     path: "/sales",
-    element: <ProtectedRoute allowedRoles={ALL_ROLES}><SalesHistory /></ProtectedRoute>,
+    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><SalesHistory /></ProtectedRoute>,
   },
   {
     path: "/summary",
@@ -143,15 +144,15 @@ const router = createBrowserRouter([
   // Expenses
   {
     path: "/expenses",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><ExpensesList /></ProtectedRoute>,
+    element: <ProtectedRoute allowedRoles={OWNER_ONLY}><ExpensesList /></ProtectedRoute>,
   },
   {
     path: "/expenses/add",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><AddExpense /></ProtectedRoute>,
+    element: <ProtectedRoute allowedRoles={OWNER_ONLY}><AddExpense /></ProtectedRoute>,
   },
   {
     path: "/expenses/edit/:id",
-    element: <ProtectedRoute allowedRoles={OWNER_MANAGER}><EditExpense /></ProtectedRoute>,
+    element: <ProtectedRoute allowedRoles={OWNER_ONLY}><EditExpense /></ProtectedRoute>,
   },
 
   // Change Password

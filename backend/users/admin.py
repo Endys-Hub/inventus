@@ -5,33 +5,21 @@ from .models import User
 
 class UserAdmin(BaseUserAdmin):
     ordering = ["id"]
-    list_display = ["id", "email", "role", "is_staff", "is_active"]
+    list_display = ["email", "role", "business", "is_staff", "is_active"]
     search_fields = ["email"]
     list_filter = ["role", "is_staff", "is_active"]
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
-        ("Role & Status", {"fields": ("role", "is_active", "is_staff")}),
-        ("Permissions", {"fields": ("is_superuser", "groups", "user_permissions")}),
+        ("Permissions", {"fields": ("role", "business", "is_staff", "is_superuser")}),
     )
 
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
-            "fields": (
-                "email",
-                "password1",
-                "password2",
-                "role",
-                "is_active",
-                "is_staff",
-            ),
+            "fields": ("email", "password1", "password2", "role", "business"),
         }),
     )
-
-    # Using email instead of username
-    def get_fieldsets(self, request, obj=None):
-        return super().get_fieldsets(request, obj)
 
 
 admin.site.register(User, UserAdmin)

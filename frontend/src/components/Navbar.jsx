@@ -4,8 +4,12 @@ import { AuthContext } from "../context/AuthContext";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const { logout } = useContext(AuthContext);
+  const { logout, user } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const isOwner = user?.role === "OWNER";
+  const isManager = user?.role === "MANAGER";
+  const isCashier = user?.role === "CASHIER";
 
   const handleLogout = async () => {
     await logout();
@@ -13,14 +17,16 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { to: "/dashboard", label: "Dashboard" },
-    { to: "/products", label: "Products" },
-    { to: "/categories", label: "Categories" },
-    { to: "/pos", label: "POS" },
-    { to: "/sales", label: "Sales" },
-    { to: "/summary", label: "Summary" },
-    { to: "/expenses", label: "Expenses" },
-  ];
+    { to: "/dashboard", label: "Dashboard", show: true },
+    { to: "/pos", label: "POS", show: true },
+    { to: "/products", label: "Products", show: isOwner || isManager },
+    { to: "/categories", label: "Categories", show: isOwner || isManager },
+    { to: "/suppliers", label: "Suppliers", show: isOwner || isManager },
+    { to: "/purchases", label: "Purchases", show: isOwner || isManager },
+    { to: "/sales", label: "Sales", show: isOwner || isManager },
+    { to: "/summary", label: "Summary", show: isOwner || isManager },
+    { to: "/expenses", label: "Expenses", show: isOwner },
+  ].filter((l) => l.show);
 
   return (
     <nav className="bg-gray-900 text-white">
