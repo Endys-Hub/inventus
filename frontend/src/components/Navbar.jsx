@@ -9,7 +9,6 @@ export default function Navbar() {
 
   const isOwner = user?.role === "OWNER";
   const isManager = user?.role === "MANAGER";
-  const isCashier = user?.role === "CASHIER";
 
   const handleLogout = async () => {
     await logout();
