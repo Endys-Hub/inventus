@@ -40,6 +40,14 @@ class ProductSerializer(serializers.ModelSerializer):
     )
     category_detail = CategorySerializer(source="category", read_only=True)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        request = self.context.get("request")
+        if request and request.user and request.user.business_id:
+            self.fields["category"].queryset = Category.objects.filter(
+                business=request.user.business
+            )
+
     class Meta:
         model = Product
         fields = [
