@@ -27,7 +27,14 @@ export default function AddProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await api.post("/inventory/products/", form);
+    const payload = {
+      name: form.name,
+      price: Number(form.price),
+      stock: Number(form.stock),
+      category: Number(form.category),
+    };
+    console.log("Payload:", payload);
+    await api.post("/inventory/products/", payload);
     navigate("/products");
   };
 

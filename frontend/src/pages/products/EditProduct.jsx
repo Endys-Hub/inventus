@@ -18,7 +18,13 @@ export default function EditProduct() {
 
   const fetchProduct = async () => {
     const res = await api.get(`/inventory/products/${id}/`);
-    setForm(res.data);
+    const p = res.data;
+    setForm({
+      name: p.name ?? "",
+      price: p.price ?? "",
+      stock: p.stock ?? "",
+      category: p.category ?? "",
+    });
   };
 
   const fetchCategories = async () => {
@@ -34,7 +40,14 @@ export default function EditProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await api.put(`/inventory/products/${id}/`, form);
+    const payload = {
+      name: form.name,
+      price: Number(form.price),
+      stock: Number(form.stock),
+      category: Number(form.category),
+    };
+    console.log("Payload:", payload);
+    await api.put(`/inventory/products/${id}/`, payload);
     navigate("/products");
   };
 
@@ -77,6 +90,7 @@ export default function EditProduct() {
             onChange={(e) => setForm({ ...form, category: e.target.value })}
             required
           >
+            <option value="">Select category</option>
             {categories.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
