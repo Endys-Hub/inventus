@@ -7,6 +7,7 @@ export default function AddProduct() {
   const navigate = useNavigate();
 
   const [categories, setCategories] = useState([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
 
   const [form, setForm] = useState({
     name: "",
@@ -16,9 +17,15 @@ export default function AddProduct() {
   });
 
   const fetchCategories = async () => {
-    const res = await api.get("/inventory/categories/");
-    const data = res.data;
-    setCategories(Array.isArray(data) ? data : (data?.results ?? []));
+    try {
+      const res = await api.get("/inventory/categories/");
+      const data = res.data;
+      setCategories(Array.isArray(data) ? data : (data?.results ?? []));
+    } catch (err) {
+      console.error("Failed to load categories:", err);
+    } finally {
+      setLoadingCategories(false);
+    }
   };
 
   useEffect(() => {
@@ -27,6 +34,17 @@ export default function AddProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!form.category) {
+      alert("Please select a category.");
+      return;
+    }
+
+    if (!categories.some((c) => c.id === Number(form.category))) {
+      alert("Invalid category selected. Please refresh and select again.");
+      return;
+    }
+
     const payload = {
       name: form.name,
       price: Number(form.price),
@@ -38,11 +56,22 @@ export default function AddProduct() {
     navigate("/products");
   };
 
+  const noCategoriesAvailable = !loadingCategories && categories.length === 0;
+  const submitDisabled = loadingCategories || categories.length === 0;
+
   return (
     <>
       <Navbar />
       <div className="p-6 max-w-xl mx-auto">
         <h1 className="text-2xl font-bold mb-4">Add Product</h1>
+
+        {noCategoriesAvailable && (
+          <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded text-amber-700 text-sm">
+            No categories available. Please{" "}
+            <a href="/categories/add" className="underline font-medium">create a category</a>{" "}
+            first.
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -75,8 +104,11 @@ export default function AddProduct() {
             value={form.category}
             onChange={(e) => setForm({ ...form, category: e.target.value })}
             required
+            disabled={loadingCategories || noCategoriesAvailable}
           >
-            <option value="">Select category</option>
+            <option value="">
+              {loadingCategories ? "Loading categories..." : "Select category"}
+            </option>
             {categories.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.name}
@@ -86,7 +118,12 @@ export default function AddProduct() {
 
           <button
             type="submit"
-            className="bg-blue-700 text-white px-4 py-2 rounded"
+            disabled={submitDisabled}
+            className={`px-4 py-2 rounded text-white ${
+              submitDisabled
+                ? "bg-blue-300 cursor-not-allowed"
+                : "bg-blue-700 hover:bg-blue-800"
+            }`}
           >
             Save
           </button>
@@ -95,4 +132,3 @@ export default function AddProduct() {
     </>
   );
 }
-
