@@ -32,6 +32,8 @@ export default function SuppliersList() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="px-4 sm:px-6 lg:px-8 py-6">
       <div className="flex justify-between mb-4">
         <h1 className="text-2xl font-bold">Suppliers</h1>
@@ -75,7 +77,7 @@ export default function SuppliersList() {
           </tbody>
         </table>
       </div>
-
+                
       <Pagination
         page={page}
         setPage={setPage}
@@ -84,5 +86,6 @@ export default function SuppliersList() {
         totalCount={totalCount}
       />
     </div>
+    </>
   );
 }

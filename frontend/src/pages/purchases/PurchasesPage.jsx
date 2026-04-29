@@ -32,6 +32,8 @@ export default function PurchasesPage() {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="px-4 sm:px-6 lg:px-8 py-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold">Purchases</h1>
@@ -86,5 +88,6 @@ export default function PurchasesPage() {
         totalCount={totalCount}
       />
     </div>
+    </>
   );
 }
