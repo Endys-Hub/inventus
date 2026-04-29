@@ -36,7 +36,7 @@ class SaleCreateSerializer(serializers.Serializer):
 
                 # Lock product row to prevent race conditions
                 try:
-                    product = Product.objects.select_for_update().get(id=pid, owner=user)
+                    product = Product.objects.select_for_update().get(id=pid, business=user.business)
                 except Product.DoesNotExist:
                     # product not found or not owned by the user
                     raise serializers.ValidationError({"product": f"Product {pid} not found or not available"})
