@@ -6,6 +6,7 @@ from rest_framework import status
 
 from inventory.models import Product
 from sales.models import Sale, SaleItem
+from users.models import Business
 
 User = get_user_model()
 
@@ -136,9 +137,22 @@ class NegativeStockPreventionTest(TestCase):
         product.refresh_from_db()
         self.assertEqual(product.stock, 5)
 
-    def test_cannot_sell_product_owned_by_another_user(self):
-        other = make_user(email="other@test.com")
-        foreign_product = make_product(other, name="ForeignWidget", stock=10)
+    def test_cannot_sell_product_from_another_business(self):
+        user1 = make_user(email="biz1owner@test.com")
+        business1 = Business.objects.create(name="Business1", owner=user1)
+        user1.business = business1
+        user1.save()
+
+        user2 = make_user(email="biz2owner@test.com")
+        business2 = Business.objects.create(name="Business2", owner=user2)
+        user2.business = business2
+        user2.save()
+
+        foreign_product = Product.objects.create(
+            owner=user1, business=business1, name="ForeignWidget", stock=10, price=Decimal("5.00")
+        )
+
+        self.client.force_authenticate(user=user2)
         resp = self.client.post(
             SALES_URL,
             {"items": [{"product": foreign_product.id, "quantity": 1}], "total_amount": "5.00"},
