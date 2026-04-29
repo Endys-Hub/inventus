@@ -5,6 +5,7 @@ import { useList } from "../../hooks/useList";
 import { TableSkeleton } from "../../components/ui/TableSkeleton";
 import { Pagination } from "../../components/ui/Pagination";
 import { ErrorMessage } from "../../components/ui/ErrorMessage";
+import Navbar from "../../components/Navbar";
 
 export default function PurchasesPage() {
   const qc = useQueryClient();
