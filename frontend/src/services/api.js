@@ -85,6 +85,7 @@ api.interceptors.response.use(
     isRefreshing = true;
 
     try {
+      console.log("Refreshing token...");
       // The refresh token travels as an httpOnly cookie — no body needed
       const { data } = await api.post("/auth/refresh/");
       const newToken = data.access;
@@ -95,13 +96,18 @@ api.interceptors.response.use(
       processQueue(null, newToken);
 
       original.headers.Authorization = `Bearer ${newToken}`;
+      console.log("Retrying request...");
       return api(original);
     } catch (refreshError) {
       processQueue(refreshError, null);
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-      // Notify AuthContext without creating a circular import
-      window.dispatchEvent(new Event("auth:logout"));
+      const status = refreshError.response?.status;
+      // Only force logout on definitive token failures (4xx).
+      // Network errors or server errors (5xx) must not log the user out.
+      if (status >= 400 && status < 500) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.dispatchEvent(new Event("auth:logout"));
+      }
       return Promise.reject(refreshError);
     } finally {
       isRefreshing = false;

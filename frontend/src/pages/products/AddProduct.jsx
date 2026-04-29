@@ -8,6 +8,7 @@ export default function AddProduct() {
 
   const [categories, setCategories] = useState([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
+  const [saving, setSaving] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
@@ -35,6 +36,8 @@ export default function AddProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (saving) return;
+
     if (!form.category) {
       alert("Please select a category.");
       return;
@@ -52,12 +55,20 @@ export default function AddProduct() {
       category: Number(form.category),
     };
     console.log("Payload:", payload);
-    await api.post("/inventory/products/", payload);
-    navigate("/products");
+
+    setSaving(true);
+    try {
+      await api.post("/inventory/products/", payload);
+      navigate("/products");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const noCategoriesAvailable = !loadingCategories && categories.length === 0;
-  const submitDisabled = loadingCategories || categories.length === 0;
+  const submitDisabled = loadingCategories || categories.length === 0 || saving;
 
   return (
     <>
@@ -121,11 +132,11 @@ export default function AddProduct() {
             disabled={submitDisabled}
             className={`px-4 py-2 rounded text-white ${
               submitDisabled
-                ? "bg-blue-300 cursor-not-allowed"
+                ? "bg-blue-300 cursor-not-allowed opacity-50"
                 : "bg-blue-700 hover:bg-blue-800"
             }`}
           >
-            Save
+            {saving ? "Saving..." : "Save"}
           </button>
         </form>
       </div>

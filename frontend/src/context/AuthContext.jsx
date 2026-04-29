@@ -73,9 +73,19 @@ export const AuthProvider = ({ children }) => {
           const { data: userData } = await api.get("/auth/me/");
           localStorage.setItem("user", JSON.stringify(userData));
           setUser(userData);
-        } catch {
-          clearSession();
-          setUser(null);
+        } catch (err) {
+          const status = err.response?.status;
+          if (status === 401 || status === 403) {
+            // Definitive auth failure — clear the invalid session
+            clearSession();
+            setUser(null);
+          } else {
+            // Network or server error — do not log out; restore from localStorage
+            const stored = localStorage.getItem("user");
+            if (stored) {
+              try { setUser(JSON.parse(stored)); } catch { /* ignore */ }
+            }
+          }
         } finally {
           setLoading(false);
         }

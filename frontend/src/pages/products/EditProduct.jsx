@@ -9,6 +9,7 @@ export default function EditProduct() {
 
   const [categories, setCategories] = useState([]);
   const [loadingCategories, setLoadingCategories] = useState(true);
+  const [saving, setSaving] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
@@ -48,6 +49,8 @@ export default function EditProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (saving) return;
+
     if (!form.category) {
       alert("Please select a category.");
       return;
@@ -65,12 +68,20 @@ export default function EditProduct() {
       category: Number(form.category),
     };
     console.log("Payload:", payload);
-    await api.put(`/inventory/products/${id}/`, payload);
-    navigate("/products");
+
+    setSaving(true);
+    try {
+      await api.put(`/inventory/products/${id}/`, payload);
+      navigate("/products");
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const noCategoriesAvailable = !loadingCategories && categories.length === 0;
-  const submitDisabled = loadingCategories || categories.length === 0;
+  const submitDisabled = loadingCategories || categories.length === 0 || saving;
 
   return (
     <>
@@ -135,11 +146,11 @@ export default function EditProduct() {
             disabled={submitDisabled}
             className={`px-4 py-2 rounded text-white ${
               submitDisabled
-                ? "bg-blue-300 cursor-not-allowed"
+                ? "bg-blue-300 cursor-not-allowed opacity-50"
                 : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            Update
+            {saving ? "Saving..." : "Update"}
           </button>
         </form>
       </div>
