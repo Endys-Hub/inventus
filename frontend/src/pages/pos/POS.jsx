@@ -207,7 +207,7 @@ export default function POS() {
 
       const payload = {
         items: saleCart.map((item) => ({ product: item.id, quantity: item.quantity, price: Number(item.price) })),
-        total: Number(saleTotal.toFixed(2)),
+        total_amount: Number(saleTotal.toFixed(2)),
         payment_method: paymentData.method,
       };
 
