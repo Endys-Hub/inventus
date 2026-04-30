@@ -8,6 +8,7 @@ import { CartProvider } from "./context/CartContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import ErrorFallback from "./components/ErrorFallback.jsx";
 
+import LandingPage from "./pages/LandingPage.jsx";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import ChangePassword from "./pages/auth/ChangePassword.jsx";
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
   {
     errorElement: <ErrorFallback />,
     children: [
+      { path: "/", element: <LandingPage /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
 
