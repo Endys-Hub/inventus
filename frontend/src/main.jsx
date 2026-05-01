@@ -12,6 +12,8 @@ import LandingPage from "./pages/LandingPage.jsx";
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import ChangePassword from "./pages/auth/ChangePassword.jsx";
+import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
+import ResetPassword from "./pages/auth/ResetPassword.jsx";
 
 import Dashboard from "./pages/dashboard/Dashboard.jsx";
 
@@ -64,6 +66,8 @@ const router = createBrowserRouter([
       { path: "/", element: <LandingPage /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
+      { path: "/forgot-password", element: <ForgotPassword /> },
+      { path: "/reset-password", element: <ResetPassword /> },
 
       // Dashboard
       {

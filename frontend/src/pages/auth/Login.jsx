@@ -67,6 +67,11 @@ export default function Login() {
             Create Account
           </Link>
         </p>
+        <p className="mt-2 text-sm">
+          <Link to="/forgot-password" className="text-blue-600">
+            Forgot password?
+          </Link>
+        </p>
       </div>
     </div>
   );
