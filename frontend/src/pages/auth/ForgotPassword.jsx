@@ -22,8 +22,8 @@ export default function ForgotPassword() {
         return;
       }
       setResult(data);
-    } catch (err) {
-      setError("Something went wrong. Please try again.");
+    } catch (error) {
+      console.error(error);
     } finally {
       setLoading(false);
     }
