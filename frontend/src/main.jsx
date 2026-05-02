@@ -43,6 +43,8 @@ import ExpensesList from "./pages/expenses/ExpensesList.jsx";
 import AddExpense from "./pages/expenses/AddExpense.jsx";
 import EditExpense from "./pages/expenses/EditExpense.jsx";
 
+import Staff from "./pages/staff/Staff.jsx";
+
 import "./index.css";
 
 const ALL_ROLES = ["OWNER", "MANAGER", "CASHIER"];
@@ -163,6 +165,12 @@ const router = createBrowserRouter([
       {
         path: "/expenses/edit/:id",
         element: <ProtectedRoute allowedRoles={OWNER_ONLY}><EditExpense /></ProtectedRoute>,
+      },
+
+      // Staff
+      {
+        path: "/staff",
+        element: <ProtectedRoute allowedRoles={OWNER_ONLY}><Staff /></ProtectedRoute>,
       },
 
       // Change Password

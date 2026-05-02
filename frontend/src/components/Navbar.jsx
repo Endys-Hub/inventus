@@ -25,6 +25,7 @@ export default function Navbar() {
     { to: "/sales", label: "Sales", show: isOwner || isManager },
     { to: "/summary", label: "Summary", show: isOwner || isManager },
     { to: "/expenses", label: "Expenses", show: isOwner },
+    { to: "/staff", label: "Staff", show: isOwner },
   ].filter((l) => l.show);
 
   return (
