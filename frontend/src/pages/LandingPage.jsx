@@ -4,34 +4,34 @@ import { Link } from "react-router-dom";
 const features = [
   {
     title: "Point of Sale (POS)",
-    desc: "Process sales quickly with a clean, intuitive POS interface built for speed.",
+    desc: "Sell quickly and record every transaction accurately — no delays, no missed sales.",
   },
   {
     title: "Inventory Management",
-    desc: "Track stock levels in real time and never lose sight of what you have on hand.",
+    desc: "Always know what you have in stock and never run out without warning.",
   },
   {
     title: "Sales Tracking",
-    desc: "View complete sales history with itemized breakdowns and daily summaries.",
+    desc: "See exactly what you sold today, yesterday, or any time you choose.",
   },
   {
     title: "Low Stock Alerts",
-    desc: "Get notified automatically when products fall below their reorder threshold.",
+    desc: "Get notified before products finish so you can restock on time.",
   },
   {
     title: "Purchase Tracking",
-    desc: "Record supplier purchases and watch stock levels update instantly on receipt.",
+    desc: "Record supplier purchases and keep your stock levels accurate automatically.",
   },
   {
     title: "Business Insights",
-    desc: "Monitor revenue, expenses, and profit from a single dashboard overview.",
+    desc: "Know your total sales, expenses, and profit at a glance.",
   },
 ];
 
 const steps = [
-  { num: "1", title: "Add your products", desc: "Set up categories, suppliers, and product listings with pricing and stock levels." },
-  { num: "2", title: "Sell using the POS", desc: "Process transactions at the counter with a fast, role-based point-of-sale interface." },
-  { num: "3", title: "Track everything in real time", desc: "Watch inventory, sales, and expenses update automatically as your business moves." },
+  { num: "1", title: "Add your products", desc: "Set up your items, prices, and stock levels in minutes." },
+  { num: "2", title: "Start selling", desc: "Use the POS to record every sale as it happens." },
+  { num: "3", title: "Stay in control", desc: "Watch your sales and stock update automatically in real time." },
 ];
 
 export default function LandingPage() {
@@ -62,17 +62,17 @@ export default function LandingPage() {
       <section className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-6 py-24 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight mb-5">
-            Run your business with<br className="hidden sm:block" /> clarity and control
+            Stop losing money in your shop<br className="hidden sm:block" /> and track every sale
           </h1>
           <p className="text-lg text-gray-500 max-w-xl mx-auto mb-10">
-            Manage inventory, track sales, and operate your store from one simple system.
+            Record sales, manage stock, and know your profit — all from one simple system.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/register"
               className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-7 py-3 rounded transition-colors"
             >
-              Get Started
+              Create Free Account
             </Link>
             <Link
               to="/login"
@@ -88,10 +88,10 @@ export default function LandingPage() {
       <section className="py-16 border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <p className="text-lg text-gray-600 leading-relaxed">
-            Manual tracking leads to errors, lost sales, and confusion.{" "}
-            <span className="text-gray-900 font-semibold">Inventus</span> helps you stay
-            organized and in control — so you can focus on growing your business, not
-            firefighting.
+            Still using a notebook or trying to remember everything? This leads to missing stock,
+            unrecorded sales, and no clear idea of your daily profit.{" "}
+            <span className="text-gray-900 font-semibold">Inventus</span> helps you track everything
+            in one place so you stay in control of your business.
           </p>
         </div>
       </section>
@@ -100,8 +100,8 @@ export default function LandingPage() {
       <section className="py-20 bg-gray-50 border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Everything you need to run your store</h2>
-            <p className="text-gray-500 mt-3">Built for small and growing businesses.</p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Everything you need to manage your shop</h2>
+            <p className="text-gray-500 mt-3">Simple tools built for small and growing businesses.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f) => (
@@ -138,10 +138,10 @@ export default function LandingPage() {
       <section className="py-24 bg-blue-600">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-            Start managing your business today
+            Start tracking your business properly today
           </h2>
           <p className="text-blue-100 mb-8">
-            Set up in minutes. No technical knowledge required.
+            Set up in minutes. No technical knowledge needed. No more guesswork.
           </p>
           <Link
             to="/register"
